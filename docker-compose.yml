@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app1:
+    build: ./app1
+    ports:
+      - "3000:3000"
+    networks:
+      - mi_red
+
+  app2:
+    build: ./app2
+    ports:
+      - "5001:5000"
+    networks:
+      - mi_red
+
+networks:
+  mi_red:
+    driver: bridge
