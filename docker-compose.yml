@@ -15,6 +15,22 @@ services:
     networks:
       - mi_red
 
+  jenkins:
+    build: ./jenkins
+    container_name: integracioncontinua-jenkins-1
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - jenkins_home:/var/jenkins_home
+    environment:
+      - DOCKER_GROUP_ID=${DOCKER_GROUP_ID}  # Pasar el ID del grupo Docker como variable de entorno
+    privileged: true
+
+volumes:
+  jenkins_home:
+  
 networks:
   mi_red:
     driver: bridge
